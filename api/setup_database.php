@@ -122,8 +122,8 @@ try {
     echo "<h2>Database setup completed successfully!</h2>";
     echo "<p>You can now:</p>";
     echo "<ul>";
-    echo "<li><a href='index.php'>View Portfolio</a></li>";
-    echo "<li><a href='admin_login.php'>Login to Admin Dashboard</a> (Username: admin, Password: admin123)</li>";
+    echo "<li><a href='/api/index.php'>View Portfolio</a></li>";
+    echo "<li><a href='/api/admin_login.php'>Login to Admin Dashboard</a> (Username: admin, Password: admin123)</li>";
     echo "</ul>";
     
 } catch(PDOException $e) {

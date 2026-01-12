@@ -1,5 +1,5 @@
 <?php
-include_once 'helpers/EmailService.php';
+include_once __DIR__ . '/../helpers/EmailService.php';
 
 $emailService = new EmailService([
     'from_email' => 'blessings.tamanga@example.com',

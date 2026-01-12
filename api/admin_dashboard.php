@@ -1,23 +1,23 @@
 <?php
 session_start();
-include_once 'config/database.php';
-include_once 'models/PersonalInfo.php';
-include_once 'models/Education.php';
-include_once 'models/Skill.php';
-include_once 'models/Hobby.php';
-include_once 'models/Dashboard.php';// ADD THIS LINE:
-include_once 'helpers/file_upload.php';
-include_once 'models/Message.php';
-include_once 'helpers/EmailService.php';
+include_once __DIR__ . '/../config/database.php';
+include_once __DIR__ . '/../models/PersonalInfo.php';
+include_once __DIR__ . '/../models/Education.php';
+include_once __DIR__ . '/../models/Skill.php';
+include_once __DIR__ . '/../models/Hobby.php';
+include_once __DIR__ . '/../models/Dashboard.php';// ADD THIS LINE:
+include_once __DIR__ . '/../helpers/file_upload.php';
+include_once __DIR__ . '/../models/Message.php';
+include_once __DIR__ . '/../helpers/EmailService.php';
 // Include models
-include_once 'models/Project.php';
-include_once 'models/Business.php';
+include_once __DIR__ . '/../models/Project.php';
+include_once __DIR__ . '/../models/Business.php';
 
 
 
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: admin_login.php');
+    header('Location: /api/admin_login.php');
     exit();
 }
 
@@ -56,16 +56,16 @@ $db = $database->getConnection();
 error_log("=== ADMIN DASHBOARD DEBUG ===");
 error_log("Upload Max Filesize: " . ini_get('upload_max_filesize'));
 error_log("Post Max Size: " . ini_get('post_max_size'));
-error_log("Uploads directory exists: " . (is_dir('uploads/') ? 'Yes' : 'No'));
-error_log("Uploads directory writable: " . (is_writable('uploads/') ? 'Yes' : 'No'));
-error_log("Images directory exists: " . (is_dir('uploads/images/') ? 'Yes' : 'No'));
-error_log("Images directory writable: " . (is_writable('uploads/images/') ? 'Yes' : 'No'));
+error_log("Uploads directory exists: " . (is_dir(__DIR__ . '/../uploads/') ? 'Yes' : 'No'));
+error_log("Uploads directory writable: " . (is_writable(__DIR__ . '/../uploads/') ? 'Yes' : 'No'));
+error_log("Images directory exists: " . (is_dir(__DIR__ . '/../uploads/images/') ? 'Yes' : 'No'));
+error_log("Images directory writable: " . (is_writable(__DIR__ . '/../uploads/images/') ? 'Yes' : 'No'));
 error_log("=== END ADMIN DASHBOARD DEBUG ===");
 
 
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: admin_login.php');
+    header('Location: /api/admin_login.php');
     exit();
 }
 
@@ -106,13 +106,13 @@ $database = new Database();
 $db = $database->getConnection();
 
 // DEBUG: Check uploads directory
-$upload_dir = 'uploads/images/';
+$upload_dir = __DIR__ . '/../uploads/images/';
 if (!is_dir($upload_dir)) {
     mkdir($upload_dir, 0755, true);
 }
 if (!is_writable($upload_dir)) {
     error_log("Upload directory not writable: " . $upload_dir);
-}
+} 
 
 // Handle message reply
 // ... existing includes and session start ...
@@ -430,7 +430,7 @@ $businessStats = $business->getCountByStatus();
 // Handle Logout
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: admin_login.php');
+    header('Location: /api/admin_login.php');
     exit();
 }
 ?>
@@ -442,8 +442,8 @@ if (isset($_GET['logout'])) {
     <title>Portfolio Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styledashboard.css">
-    <script src="assets/interactivity/js.js"></script>
+    <link rel="stylesheet" href="/assets/css/styledashboard.css">
+    <script src="/assets/interactivity/js.js"></script>
     <style>
         
     /* Dark Theme Variables - Minimal Additions */
@@ -1729,7 +1729,6 @@ background: var(--bg-primary)
         </div>
     </div>
 
-    <script src="assets\interactivity\admin.js">
-    </script>
+    <script src="/assets/interactivity/admin.js"></script>
 </body>
 </html>

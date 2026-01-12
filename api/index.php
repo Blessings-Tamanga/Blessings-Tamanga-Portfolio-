@@ -1,15 +1,15 @@
 <?php
-include_once 'config/database.php';
-include_once 'models/PersonalInfo.php';
-include_once 'models/Education.php';
-include_once 'models/Skill.php';
-include_once 'models/Hobby.php';
-include_once 'models/Dashboard.php';
-include_once 'models/Message.php';
-include_once 'helpers/EmailService.php';
+include_once __DIR__ . '/../config/database.php';
+include_once __DIR__ . '/../models/PersonalInfo.php';
+include_once __DIR__ . '/../models/Education.php';
+include_once __DIR__ . '/../models/Skill.php';
+include_once __DIR__ . '/../models/Hobby.php';
+include_once __DIR__ . '/../models/Dashboard.php';
+include_once __DIR__ . '/../models/Message.php';
+include_once __DIR__ . '/../helpers/EmailService.php';
 // Add these includes at the top
-include_once 'models/Project.php';
-include_once 'models/Business.php';
+include_once __DIR__ . '/../models/Project.php';
+include_once __DIR__ . '/../models/Business.php';
 
 
 
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($info['full_name'] ?? 'My Portfolio'); ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     
     <style>
             /* Projects & Businesses Sections */
@@ -671,7 +671,7 @@ background: var(--bg-primary)
                          alt="Profile Image of <?php echo htmlspecialchars($info['full_name']); ?>">
                 <?php else: ?>
                     <!-- Show default image if no profile image -->
-                    <img src="assets/media/DSC_5275 (2).jpg" alt="Profile Image">
+                    <img src="/assets/media/DSC_5275 (2).jpg" alt="Profile Image">
                 <?php endif; ?>
             </div>
             <div class="about-text">

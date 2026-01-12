@@ -1,6 +1,7 @@
 <?php
 class FileUpload {
-    private $basePath = 'uploads/';
+    private $publicBase = 'uploads/';
+    private $basePath = __DIR__ . '/../uploads/';
     private $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     private $maxSize = 500 * 1024 * 1024; // 500MB
 
@@ -72,6 +73,7 @@ class FileUpload {
         // Generate unique filename
         $filename = $subdir . uniqid() . '_' . time() . '.' . $extension;
         $fullPath = $this->basePath . $filename;
+        $publicPath = $this->publicBase . $filename;
 
         error_log("Attempting to move file from: " . $file['tmp_name'] . " to: " . $fullPath);
 
@@ -97,7 +99,7 @@ class FileUpload {
             // Verify the file was actually created
             if (file_exists($fullPath)) {
                 $response['success'] = true;
-                $response['file_path'] = $fullPath;
+                $response['file_path'] = $publicPath;
                 $response['file_name'] = $filename;
                 $response['message'] = 'File uploaded successfully!';
             } else {
@@ -129,8 +131,15 @@ class FileUpload {
     }
 
     public function deleteFile($filePath) {
-        if (file_exists($filePath)) {
-            return unlink($filePath);
+        // Accept either public path (uploads/...) or absolute filesystem path
+        if (strpos($filePath, $this->publicBase) === 0) {
+            $fsPath = $this->basePath . substr($filePath, strlen($this->publicBase));
+        } else {
+            $fsPath = $filePath;
+        }
+
+        if (file_exists($fsPath)) {
+            return unlink($fsPath);
         }
         return false;
     }

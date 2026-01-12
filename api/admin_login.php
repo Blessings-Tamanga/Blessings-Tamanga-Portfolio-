@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once 'config/database.php';
+include_once __DIR__ . '/../config/database.php';
 
-$error = '';
+$error = ''; 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username === 'Alitheia' && $password === '$Minister@123') {
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['admin_username'] = $username;
-        header('Location: admin_dashboard.php');
+        header('Location: /api/admin_dashboard.php');
         exit();
     } else {
         $error = "Invalid credentials!";
